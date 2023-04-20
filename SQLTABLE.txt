@@ -1,0 +1,36 @@
+CREATE TABLE [dbo].[PhoneTable] (
+    [Pcode]    INT          IDENTITY (1000, 1) NOT NULL,
+    [PMarque]  VARCHAR (50) NOT NULL,
+    [PModele]  VARCHAR (50) NOT NULL,
+    [Prix]     INT          NOT NULL,
+    [PQte]     INT          NOT NULL,
+    [PCouleur] VARCHAR (50) NOT NULL,
+    PRIMARY KEY CLUSTERED ([Pcode] ASC)
+);
+
+CREATE TABLE [dbo].[AccessoireTbl] (
+    [AcCode]   INT           IDENTITY (500, 1) NOT NULL,
+    [AcNom]    VARCHAR (150) NOT NULL,
+    [AcMarque] VARCHAR (50)  NOT NULL,
+    [AcModel]  VARCHAR (50)  NOT NULL,
+    [AcPrix]   INT           NOT NULL,
+    [AcQte]    INT           NOT NULL,
+    PRIMARY KEY CLUSTERED ([AcCode] ASC)
+);
+CREATE TABLE [dbo].[UserTbl] (
+    [Id]    INT           IDENTITY (500, 1) NOT NULL,
+    [NomUt] VARCHAR (150) NOT NULL,
+    [Mdp]   VARCHAR (150) NOT NULL,
+    PRIMARY KEY CLUSTERED ([Id] ASC)
+);
+CREATE TABLE [dbo].[FactureTbl] (
+    [FCode]      INT  IDENTITY (1, 1) NOT NULL,
+    [FDate]      DATE NOT NULL,
+    [Phone]      INT  NULL,
+    [Accessoire] INT  NULL,
+    [Montant]    INT  NOT NULL,
+    PRIMARY KEY CLUSTERED ([FCode] ASC),
+    CONSTRAINT [FK] FOREIGN KEY ([Phone]) REFERENCES [dbo].[PhoneTable] ([Pcode]),
+    CONSTRAINT [FK1] FOREIGN KEY ([Accessoire]) REFERENCES [dbo].[AccessoireTbl] ([AcCode])
+);
+
